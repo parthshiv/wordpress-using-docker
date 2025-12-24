@@ -10,7 +10,7 @@ services:
           networks:
             - wordpress-networks
           volumes: 
-            - mysql_data:var/lib/mysql
+            - mysql_data:/var/lib/mysql
           ports:
             - '3306:3306'
         wordpress:
@@ -20,7 +20,7 @@ services:
           container_name: "wordpress-container"
           image: "wordpress:latest"
           environment:
-            - WORDPRESS_DB_HOST: database:3306
+            - WORDPRESS_DB_HOST: 'database:3306'
             - WORDPRESS_DB_USER: 'root'
             - WORDPRESS_DB_PASSWORD: 'admin123'
           ports:
@@ -28,14 +28,14 @@ services:
           networks: 
             - wordpress-networks
           volumes: 
-            - 'wordpress-data:var/www/html'
+            - 'wordpress-data:/var/www/html'
         
-        networks:
-          wordpress-networks:
-            driver: 'bridge'
-        
-        volumes:
-          wordpress-data:
-          mysql_data:
+networks:
+  wordpress-networks:
+    driver: 'bridge'
+
+volumes:
+  wordpress-data:
+  mysql_data:
 
             
