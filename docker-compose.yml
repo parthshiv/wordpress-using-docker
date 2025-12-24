@@ -3,10 +3,10 @@ services:
           image: "mysql:latest"
           container_name: "mysql-container"
           environment:
-            - MYSQL_ROOT_PASSWORD: 'root'
-            - MYSQL_DATABASE: 'wordpress-db'
-            - MYSQL_USER: 'root'
-            - MYSQL_PASSWORD: 'admin123'
+            MYSQL_ROOT_PASSWORD: 'admin123'
+            MYSQL_DATABASE: 'wordpress-db'
+            MYSQL_USER: 'admin'
+            MYSQL_PASSWORD: 'admin123'
           networks:
             - wordpress-networks
           volumes: 
@@ -20,9 +20,10 @@ services:
           container_name: "wordpress-container"
           image: "wordpress:latest"
           environment:
-            - WORDPRESS_DB_HOST: 'database:3306'
-            - WORDPRESS_DB_USER: 'root'
-            - WORDPRESS_DB_PASSWORD: 'admin123'
+            WORDPRESS_DB_HOST: 'database:3306'
+            WORDPRESS_DB_USER: 'admin'
+            WORDPRESS_DB_PASSWORD: 'admin123'
+            WORDPRESS_DB_NAME: 'wordpress-db'
           ports:
             - '8085:80'
           networks: 
